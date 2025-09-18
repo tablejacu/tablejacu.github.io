@@ -1,0 +1,229 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --bg-color-light: #f4f7f6;
+    --text-color-light: #333;
+    --card-bg-light: #ffffff;
+    --border-color-light: #e0e0e0;
+    --header-bg-light: #007bff;
+
+    --bg-color-dark: #121212;
+    --text-color-dark: #e0e0e0;
+    --card-bg-dark: #1e1e1e;
+    --border-color-dark: #333;
+    --header-bg-dark: #1a1a1a;
+
+    --font-family: 'Roboto', sans-serif;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- Dark Mode --- */
+body.dark-mode {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark-mode .container {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .timetable {
+    border-color: var(--border-color-dark);
+}
+
+body.dark-mode .timetable th, 
+body.dark-mode .timetable td {
+    border-color: var(--border-color-dark);
+}
+
+body.dark-mode .timetable thead {
+    background-color: var(--header-bg-dark);
+}
+
+body.dark-mode .timetable tbody tr:nth-child(even) {
+    background-color: #2c2c2c;
+}
+
+body.dark-mode #theme-toggle {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+/* --- Main Layout --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--card-bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px 30px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color-light);
+    padding-bottom: 15px;
+}
+
+body.dark-mode header {
+    border-bottom-color: var(--border-color-dark);
+}
+
+header h1 {
+    margin: 0;
+    color: var(--header-bg-light);
+    font-size: 2em;
+}
+
+body.dark-mode header h1 {
+    color: #0099ff;
+}
+
+#theme-toggle {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#theme-toggle:hover {
+    background-color: #f0f0f0;
+}
+
+/* --- Timetable Styles --- */
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.timetable th, .timetable td {
+    border: 1px solid var(--border-color-light);
+    padding: 15px;
+    transition: background-color 0.3s;
+}
+
+.timetable thead {
+    background-color: var(--header-bg-light);
+    color: white;
+}
+
+.timetable th {
+    font-weight: 700;
+}
+
+.timetable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.timetable tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+body.dark-mode .timetable tbody tr:hover {
+    background-color: #3a3a3a;
+}
+
+.timetable .time-slot {
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.subject {
+    font-weight: bold;
+    display: block;
+    font-size: 1.1em;
+}
+
+.details {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+    display: block;
+}
+
+body.dark-mode .details {
+    color: #aaa;
+}
+
+/* Highlight for current day and slot */
+.current-day {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.current-slot {
+    background-color: rgba(40, 167, 69, 0.2) !important;
+    border: 2px solid #28a745;
+    transform: scale(1.02);
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* --- Responsive Design for Mobile --- */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 15px;
+    }
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .timetable thead {
+        display: none;
+    }
+    .timetable, .timetable tbody, .timetable tr, .timetable td {
+        display: block;
+        width: 100%;
+    }
+    .timetable tr {
+        margin-bottom: 15px;
+        border: 1px solid var(--border-color-light);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+    body.dark-mode .timetable tr {
+        border-color: var(--border-color-dark);
+    }
+    .timetable td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    .timetable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: calc(50% - 30px);
+        text-align: left;
+        font-weight: bold;
+    }
+    .current-slot {
+        transform: none; /* Disable scaling on mobile */
+    }
+}
