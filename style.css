@@ -1,201 +1,208 @@
 /* --- Global Styles & Variables --- */
 :root {
-    --bg-color-light: #f4f7f6;
-    --text-color-light: #333;
+    --bg-light: #f4f7f6;
+    --text-light: #333;
     --card-bg-light: #ffffff;
-    --border-color-light: #e0e0e0;
-    --header-bg-light: #007bff;
+    --border-light: #e0e0e0;
+    --primary-color: #007bff;
+    --completed-color: #28a745;
 
-    --bg-color-dark: #121212;
-    --text-color-dark: #e0e0e0;
+    --bg-dark: #121212;
+    --text-dark: #e0e0e0;
     --card-bg-dark: #1e1e1e;
-    --border-color-dark: #333;
-    --header-bg-dark: #1a1a1a;
+    --border-dark: #333;
 
     --font-family: 'Roboto', sans-serif;
     --border-radius: 8px;
-    --box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 body {
     font-family: var(--font-family);
     margin: 0;
-    padding: 20px;
-    background-color: var(--bg-color-light);
-    color: var(--text-color-light);
+    background-color: var(--bg-light);
+    color: var(--text-light);
     transition: background-color 0.3s, color 0.3s;
 }
 
 /* --- Dark Mode --- */
 body.dark-mode {
-    background-color: var(--bg-color-dark);
-    color: var(--text-color-dark);
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
 }
-
-body.dark-mode .container {
+body.dark-mode .side-menu,
+body.dark-mode .main-content {
     background-color: var(--card-bg-dark);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
-
-body.dark-mode .timetable {
-    border-color: var(--border-color-dark);
+body.dark-mode .side-menu {
+    border-right-color: var(--border-dark);
 }
-
-body.dark-mode .timetable th, 
-body.dark-mode .timetable td {
-    border-color: var(--border-color-dark);
+body.dark-mode header {
+    border-bottom-color: var(--border-dark);
 }
-
-body.dark-mode .timetable thead {
-    background-color: var(--header-bg-dark);
-}
-
-body.dark-mode .timetable tbody tr:nth-child(even) {
+body.dark-mode .side-menu-item:hover {
     background-color: #2c2c2c;
 }
-
+body.dark-mode .side-menu-item.active {
+    background-color: var(--primary-color);
+}
+body.dark-mode .chapter-table th,
+body.dark-mode .chapter-table td {
+    border-color: var(--border-dark);
+}
+body.dark-mode .chapter-table tbody tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
 body.dark-mode #theme-toggle {
     background-color: #333;
     color: #fff;
-    border: 1px solid #555;
+    border-color: #555;
 }
 
 /* --- Main Layout --- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-menu {
+    width: 250px;
     background-color: var(--card-bg-light);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: 20px 30px;
+    border-right: 1px solid var(--border-light);
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.menu-title {
+    padding: 0 20px;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.side-menu-item {
+    padding: 15px 20px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: background-color 0.2s, border-left-color 0.2s;
+}
+
+.side-menu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.side-menu-item.active {
+    background-color: #e6f2ff;
+    border-left-color: var(--primary-color);
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: var(--bg-light);
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--border-color-light);
     padding-bottom: 15px;
-}
-
-body.dark-mode header {
-    border-bottom-color: var(--border-color-dark);
+    border-bottom: 1px solid var(--border-light);
+    margin-bottom: 20px;
 }
 
 header h1 {
     margin: 0;
-    color: var(--header-bg-light);
     font-size: 2em;
-}
-
-body.dark-mode header h1 {
-    color: #0099ff;
 }
 
 #theme-toggle {
     padding: 10px 15px;
     border: 1px solid #ccc;
-    background-color: #fff;
-    color: #333;
+    background-color: var(--card-bg-light);
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
-    transition: background-color 0.2s, color 0.2s;
 }
 
-#theme-toggle:hover {
-    background-color: #f0f0f0;
-}
-
-/* --- Timetable Styles --- */
-.timetable {
+/* --- Chapter Table --- */
+.chapter-table {
     width: 100%;
     border-collapse: collapse;
+}
+
+.chapter-table th, .chapter-table td {
+    border: 1px solid var(--border-light);
+    padding: 12px 15px;
     text-align: left;
 }
 
-.timetable th, .timetable td {
-    border: 1px solid var(--border-color-light);
-    padding: 15px;
-    transition: background-color 0.3s;
+.chapter-table thead {
+    background-color: #f8f9fa;
+}
+body.dark-mode .chapter-table thead {
+    background-color: #2c2c2c;
 }
 
-.timetable thead {
-    background-color: var(--header-bg-light);
-    color: white;
-}
-
-.timetable th {
+.chapter-table th {
     font-weight: 700;
 }
 
-.timetable tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+.chapter-table tbody tr:nth-child(even) {
+    background-color: #fdfdfd;
 }
 
-.timetable tbody tr:hover {
-    background-color: #e9ecef;
+/* --- Checkbox and Completed State --- */
+.chapter-table input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
 }
 
-body.dark-mode .timetable tbody tr:hover {
-    background-color: #3a3a3a;
+.chapter-name.completed {
+    text-decoration: line-through;
+    color: #888;
 }
-
-.timetable .ch-no {
+body.dark-mode .chapter-name.completed {
+    color: #666;
+}
+.completed-text {
+    color: var(--completed-color);
     font-weight: bold;
-    text-align: center;
+    font-style: italic;
 }
 
-footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #777;
-}
 
-/* --- Responsive Design for Mobile --- */
-@media (max-width: 992px) {
-    body {
-        padding: 10px;
-    }
-    .container {
-        padding: 15px;
-    }
-    header {
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .app-layout {
         flex-direction: column;
-        gap: 10px;
     }
-    .timetable thead {
+    .side-menu {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        display: flex;
+        overflow-x: auto;
+        padding: 0;
+    }
+    .menu-title {
         display: none;
     }
-    .timetable, .timetable tbody, .timetable tr, .timetable td {
-        display: block;
-        width: 100%;
+    .side-menu-item {
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        white-space: nowrap;
     }
-    .timetable tr {
-        margin-bottom: 15px;
-        border: 1px solid var(--border-color-light);
-        border-radius: var(--border-radius);
-        overflow: hidden;
+    .side-menu-item.active {
+        border-bottom-color: var(--primary-color);
     }
-    body.dark-mode .timetable tr {
-        border-color: var(--border-color-dark);
+    .main-content {
+        padding: 15px;
     }
-    .timetable td {
-        text-align: right;
-        padding-left: 40%;
-        position: relative;
-    }
-    .timetable td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        width: calc(40% - 30px);
-        text-align: left;
-        font-weight: bold;
-    }
-    .timetable .ch-no {
-       text-align: right;
+    header h1 {
+        font-size: 1.5em;
     }
 }
