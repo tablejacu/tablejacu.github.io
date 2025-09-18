@@ -112,7 +112,7 @@ body.dark-mode header h1 {
 .timetable {
     width: 100%;
     border-collapse: collapse;
-    text-align: center;
+    text-align: left;
 }
 
 .timetable th, .timetable td {
@@ -142,37 +142,9 @@ body.dark-mode .timetable tbody tr:hover {
     background-color: #3a3a3a;
 }
 
-.timetable .time-slot {
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.subject {
+.timetable .ch-no {
     font-weight: bold;
-    display: block;
-    font-size: 1.1em;
-}
-
-.details {
-    font-size: 0.9em;
-    color: #555;
-    margin-top: 5px;
-    display: block;
-}
-
-body.dark-mode .details {
-    color: #aaa;
-}
-
-/* Highlight for current day and slot */
-.current-day {
-    background-color: rgba(0, 123, 255, 0.1);
-}
-
-.current-slot {
-    background-color: rgba(40, 167, 69, 0.2) !important;
-    border: 2px solid #28a745;
-    transform: scale(1.02);
+    text-align: center;
 }
 
 footer {
@@ -183,7 +155,7 @@ footer {
 }
 
 /* --- Responsive Design for Mobile --- */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     body {
         padding: 10px;
     }
@@ -212,18 +184,18 @@ footer {
     }
     .timetable td {
         text-align: right;
-        padding-left: 50%;
+        padding-left: 40%;
         position: relative;
     }
     .timetable td::before {
         content: attr(data-label);
         position: absolute;
         left: 15px;
-        width: calc(50% - 30px);
+        width: calc(40% - 30px);
         text-align: left;
         font-weight: bold;
     }
-    .current-slot {
-        transform: none; /* Disable scaling on mobile */
+    .timetable .ch-no {
+       text-align: right;
     }
 }
